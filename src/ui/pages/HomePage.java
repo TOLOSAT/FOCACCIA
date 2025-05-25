@@ -1,45 +1,49 @@
 package ui.pages;
-import java.awt.Font;
+import java.awt.FlowLayout;
+import java.awt.image.BufferedImage;
+import java.io.File;
 
+import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
-import javax.swing.border.EmptyBorder;
 
-import ui.components.FileSelector;
-import ui.components.ReportDisplay;
+import debug.uart.UartConnector;
+import ui.components.LabeledPanel;
+import ui.components.PortListDisplay;
+import ui.components.TCSender;
+import ui.components.UartConsole;
 
 public class HomePage extends JPanel {
     public HomePage() {
         super();
 
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
         // Add a welcome message
-        add(createLabeledPanel("Welcome to the Tapas Debugger!", true));
+        add(new LabeledPanel("Welcome to Focaccia, the Tapas Debugger!", true));
+        add(new LabeledPanel("Flatsat Operations Control And Command Interface Application", false));
+        add(new JSeparator());
+
+        try {
+            BufferedImage myPicture = ImageIO.read(new File("assets/tolosat_logo.png"));
+            JLabel logoLabel = new JLabel(new ImageIcon(myPicture));
+            JPanel logoPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+            logoPanel.add(logoLabel);
+            add(logoPanel);
+        } catch (Exception e) {
+            e.printStackTrace();
+            add(new JLabel("Failed to load logo image."));
+        }
 
         add(new JSeparator());
 
-        // Add a file selector
-        FileSelector fileSelector = new FileSelector();
-        add(fileSelector);
-
-        // Diplays the selected file
-        ReportDisplay reportDisplay = new ReportDisplay(fileSelector.getFile());
-        add(reportDisplay);
-
-        // Set the layout
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-    }
-
-    private JPanel createLabeledPanel(String text, boolean isTitle) {
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
-        JLabel label = new JLabel(text);
-        if (isTitle) {
-            label.setFont(label.getFont().deriveFont(Font.BOLD, 14f));
-        }
-        panel.add(label);
-        panel.setBorder(new EmptyBorder(5, 0, 5, 0));
-        return panel;
+        // Add credits
+        add(new LabeledPanel("Credits:", true));
+        add(new LabeledPanel("Focaccia is a tool developed by Theo Bessel, part of the Tolosat Flight Software team.", false));
+        add(new LabeledPanel("For more information, visit: https://theobessel.fr/tapas-debugger", false));
+        add(new JSeparator());
     }
 }

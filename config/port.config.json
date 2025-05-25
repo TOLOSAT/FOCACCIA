@@ -1,0 +1,16 @@
+{
+    "console": {
+        "port": "tty.usbserial-B0001LWG",
+        "baud": 115200,
+        "dataBits": 8,
+        "stopBits": 1,
+        "parity": 0
+    },
+    "pus": {
+        "port": "tty.usbmodem11203",
+        "baud": 115200,
+        "dataBits": 8,
+        "stopBits": 1,
+        "parity": 0
+    }
+}

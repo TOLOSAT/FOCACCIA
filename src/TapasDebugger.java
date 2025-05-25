@@ -1,20 +1,35 @@
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fazecast.jSerialComm.SerialPort;
+
+import controller.ConsoleController;
+import controller.PusController;
+import debug.SerialConnector;
+import debug.uart.UartConnector;
+import ui.pages.ConsolePage;
 import ui.pages.HomePage;
+import ui.pages.ReportPage;
 
 public class TapasDebugger extends JFrame {
     final static String HOMEPAGE = "Home";
-    final static String DEBUG = "Debug";
+    final static String CONSOLE = "Console";
+    final static String REPORT = "Report";
 
     public TapasDebugger() {
         // Set up the window
-        super("Tapas Debugger");
+        super("Focaccia - Tapas Debugger");
+
+        new ConsoleController();
+        new PusController();
 
         WindowListener l = new WindowAdapter() {
             public void windowClosing(WindowEvent e){
@@ -23,23 +38,19 @@ public class TapasDebugger extends JFrame {
         };
 
         addWindowListener(l);
-        setSize(800,600);
+        setSize(1000,800);
         setVisible(true);
-
-        // Set up the card layout
-        HomePage home = new HomePage();
 
         // Create the tabbed pane
         JTabbedPane cards = new JTabbedPane();
-        cards.addTab(HOMEPAGE, home);
+        cards.addTab(HOMEPAGE, new HomePage());
+        cards.addTab(CONSOLE, new ConsolePage());
+        cards.addTab(REPORT, new ReportPage());
 
         add(cards, BorderLayout.CENTER);
     }
 
     public static void main(String [] args){
-        JFrame frame = new TapasDebugger();
-
-        // frame.pack();
-        frame.setVisible(true);
+        new TapasDebugger().setVisible(true);
     }
 }

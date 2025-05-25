@@ -4,7 +4,6 @@ import java.awt.Font;
 import java.nio.file.Path;
 
 import javax.swing.BoxLayout;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
@@ -26,14 +25,14 @@ public class ReportDisplay extends JPanel {
         ErrorReport report = decoder.decodeErrorReport();
 
         // Display the error report
-        add(createLabeledPanel("Software version: " + report.getContext().getVersion(), false));
-        add(createLabeledPanel("Software state: " + report.getContext().getState(), false));
-        add(createLabeledPanel("Boot count: " + report.getContext().getBootCount(), false));
-        add(createLabeledPanel("Failed boot count: " + report.getContext().getFailedBootCount(), false));
+        add(new LabeledPanel("Software version: " + report.getContext().getVersion(), false));
+        add(new LabeledPanel("Software state: " + report.getContext().getState(), false));
+        add(new LabeledPanel("Boot count: " + report.getContext().getBootCount(), false));
+        add(new LabeledPanel("Failed boot count: " + report.getContext().getFailedBootCount(), false));
 
         add(new JSeparator());
 
-        add(createLabeledPanel("Saved registers:", true));
+        add(new LabeledPanel("Saved registers:", true));
         add(createTablePanel(new String[]{"Register", "Value"}, new Object[][]{
             {"r0", "0x" + Integer.toHexString(report.getSavedRegisters().r()[0])},
             {"r1", "0x" + Integer.toHexString(report.getSavedRegisters().r()[1])},
@@ -47,7 +46,7 @@ public class ReportDisplay extends JPanel {
 
         add(new JSeparator());
 
-        add(createLabeledPanel("Faults:", true));
+        add(new LabeledPanel("Faults:", true));
         add(createTablePanel(new String[]{"Fault", "Value"}, new Object[][]{
             {"cfsr", "0x" + Integer.toHexString(report.cfsr())},
             {"hfsr", "0x" + Integer.toHexString(report.hfsr())}
@@ -55,7 +54,7 @@ public class ReportDisplay extends JPanel {
 
         add(new JSeparator());
 
-        add(createLabeledPanel("Call stack:", true));
+        add(new LabeledPanel("Call stack:", true));
         Object[][] callStackData = new Object[report.getCallStack().calls().length][2];
         int i = 0;
         for (Call call : report.getCallStack().calls()) {
@@ -64,18 +63,6 @@ public class ReportDisplay extends JPanel {
             i++;
         }
         add(createTablePanel(new String[]{"LR", "FP"}, callStackData));
-    }
-
-    private JPanel createLabeledPanel(String text, boolean isTitle) {
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
-        JLabel label = new JLabel(text);
-        if (isTitle) {
-            label.setFont(label.getFont().deriveFont(Font.BOLD, 14f));
-        }
-        panel.add(label);
-        panel.setBorder(new EmptyBorder(5, 0, 5, 0));
-        return panel;
     }
 
     private JScrollPane createTablePanel(String[] columnNames, Object[][] data) {
