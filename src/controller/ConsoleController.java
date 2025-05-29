@@ -1,13 +1,15 @@
 package controller;
 
-import debug.SerialConnector;
+import java.awt.Color;
+
+import model.SerialConnector;
 
 public class ConsoleController {
     public SerialConnector console;
 
     public ConsoleController() {
-        console = new SerialConnector("console");
+        console = new SerialConnector("console", Color.DARK_GRAY);
         console.connect();
-        new Thread(() -> console.readLines()).start();
+        console.readLines();
     }
 }

@@ -7,7 +7,7 @@
         "parity": 0
     },
     "pus": {
-        "port": "tty.usbmodem11203",
+        "port": "tty.usbmodem1103",
         "baud": 115200,
         "dataBits": 8,
         "stopBits": 1,

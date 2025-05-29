@@ -23,7 +23,7 @@ $(BIN_DIR)/%.class: $(SRC_DIR)/%.java
 	$(JAVAC) -cp $(CLASSPATH) -d $(BIN_DIR) -sourcepath $(SRC_DIR) $(SOURCES)
 
 run: all
-	$(JAVA) -cp $(CLASSPATH) TapasDebugger
+	$(JAVA) -cp $(CLASSPATH) MainApplication
 
 clean:
 	rm -rf $(BIN_DIR)

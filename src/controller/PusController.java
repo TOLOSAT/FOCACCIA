@@ -1,17 +1,22 @@
 package controller;
 
-import debug.SerialConnector;
+import java.awt.Color;
+
+import model.SerialConnector;
+import model.pus.Command;
 
 public class PusController {
     public static SerialConnector pus;
 
     public PusController() {
-        pus = new SerialConnector("pus");
+        pus = new SerialConnector("pus", Color.BLUE);
         pus.connect();
-        new Thread(() -> pus.read()).start();
+        pus.read();
     }
 
-    public static void sendCommand(byte[] command) {
-        pus.write(command);
+    public static void sendCommand(Command command) {
+        // Toujours regénérer les bytes à l'envoi
+        byte[] commandBytes = command.getBytes();
+        pus.write(commandBytes);
     }
 }
