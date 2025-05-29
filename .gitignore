@@ -1,4 +1,5 @@
-assets
+assets/*.bin
 bin
 *.class
 .DS_Store
+*.mov
