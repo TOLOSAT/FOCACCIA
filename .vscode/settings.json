@@ -3,7 +3,6 @@
         "src"
     ],
     "java.project.referencedLibraries": [
-        "third-parties/jSerialComm-2.11.0.jar",
         "third-parties/**/*.jar"
     ]
 }
