@@ -39,7 +39,9 @@ The software will soon be able to parse the **PUS** **TC**s and **TM**s, and to 
 
 ![Real Time Console Demonstration](doc/assets/DemoPUS.gif)
 
-I'm also working on a way to flash the satelitte's software from the interface, this will allow to update the flight software directly from the interface without having to use the command line tools. It will also allow to write the option bytes and then to switch between the booloader mode and the application mode.
+It is also able to flash the satelitte's software from the interface, this allows to update the flight software directly from the interface without having to use the command line tools. It also permits to write the option bytes and then to switch between the booloader mode and the application mode.
+
+![Boot mode switch demonstration](doc/assets/BootloaderSwitch.png)
 
 ### Technical choices
 
