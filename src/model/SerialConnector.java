@@ -26,7 +26,7 @@ public class SerialConnector {
     private byte[] buffer;
     private Color color;
 
-    private static final int SKIP_LINES = 5;
+    private static final int SKIP_LINES = 3;
 
     public SerialConnector(String name) {
         this(name, Color.BLACK);
@@ -116,7 +116,7 @@ public class SerialConnector {
                                     i++;
                                 } else {
                                     // Afficher la ligne dans la console
-                                    System.out.println(String.format("[%s] - %s", name, lineBuffer.toString()));
+                                    // System.out.println(String.format("[%s] - %s", name, lineBuffer.toString()));
                                     UartConsole.appendLine(String.format("[%s] - %s", name, lineBuffer.toString()), color);
                                 }
                                 lineBuffer.setLength(0);
@@ -152,7 +152,7 @@ public class SerialConnector {
                         // Convert the read bytes to a string of hex values
                         String hexString = HexFormat.ofDelimiter(":").formatHex(buffer, 0, numRead);
 
-                        System.out.println(String.format("[%s] - %s", name, hexString));
+                        // System.out.println(String.format("[%s] - %s", name, hexString));
                         UartConsole.appendLine(String.format("[%s] - %s", name, hexString), color);
                     }
                 }
