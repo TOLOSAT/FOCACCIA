@@ -1,0 +1,4 @@
+{
+    "bootloader": "/Users/theobessel/Documents/N7/Clubs/Tolosat/flight-software/bootloader/build/output/boot-software-debug.elf",
+    "flash": "/Users/theobessel/Documents/N7/Clubs/Tolosat/flight-software/build/output/flight-software-debug.elf"
+}
