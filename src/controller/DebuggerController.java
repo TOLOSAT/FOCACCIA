@@ -34,15 +34,18 @@ public class DebuggerController {
             // Read the JSON file as a string
             String json = Files.readString(Path.of("config/target.config.json"));
 
-            // Parse the JSON string into a Config object without ObjectMapper
+            // Parse the JSON string into a TargetConfig object without ObjectMapper
             ObjectMapper mapper = new ObjectMapper();
             TargetConfig config = mapper.readValue(json, TargetConfig.class);
 
-            // Get the port configuration for the specified name
+            // Get the targer configuration for the specified name
             this.bootloader_path = config.getPath("bootloader");
-            this.flash_path = config.getPath("path");
+            this.flash_path = config.getPath("flash");
+
+            System.out.println("Bootloader path: " + bootloader_path);
+            System.out.println("Flash path: " + flash_path);
         } catch (Exception e) {
-            System.err.println("Error reading port configuration: " + e.getMessage());
+            System.err.println("Error reading targer configuration: " + e.getMessage());
         }
     }
 

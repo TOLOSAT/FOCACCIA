@@ -2,11 +2,11 @@ package model.config;
 
 import java.util.Map;
 
-public record TargetConfig(String bootloader, String path) {
+public record TargetConfig(String bootloader, String flash) {
     private Map<String, String> paths() {
         return Map.of(
             "bootloader", bootloader,
-            "path", path
+            "flash", flash
         );
     }
 
